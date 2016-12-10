@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.IPersonnelManagerDao">
+	<select id="findPersonnelManager" resultType="com.crm.model.PersonnelManager">
+		select id, creator, createTime, updater, updateTime, remark, name, cnname, password, address, telephone, email, beginDate, endDate, access_fileLevel as accessFileLevel, menus, popedom, status, commendman, movetelephone, nowaddress, nowtelephone, identitycode, insurancecode, instancylinkman, instancytelephone, sex, birthday, personneltype, duty, workdate, highschool, finishschool, finishschooldate, consortname, youngonename, officetelephone, consorttelephone, avocation, consortcompany, strongsuit, communicate, bringup, organise, analyse, planing, empolder, relation, role_id as roleId, group_Id as groupId, access_group_id as accessGroupId  
+		from s_user 
+		limit #{from}, #{pageSize}
+	</select>
+	<select id="countPersonnelManager" resultType="Integer">
+		select count(id)
+		from s_user
+	</select>
+	<select id="findAllPersonnelManager" resultType="com.crm.model.PersonnelManager">
+		select One.id, One.creator, One.createTime, One.updater, One.updateTime, One.remark, One.name, One.cnname, One.password, One.address, One.telephone, One.email, One.beginDate, One.endDate, One.access_fileLevel as accessFileLevel, One.menus, One.popedom, One.status, One.commendman, One.movetelephone, One.nowaddress, One.nowtelephone, One.identitycode, One.insurancecode, One.instancylinkman, One.instancytelephone, One.sex, One.birthday, One.personneltype, One.duty, One.workdate, One.highschool, One.finishschool, One.finishschooldate, One.consortname, One.youngonename, One.officetelephone, One.consorttelephone, One.avocation, One.consortcompany, One.strongsuit, One.communicate, One.bringup, One.organise, One.analyse, One.planing, One.empolder, One.relation, One.role_id as roleId, One.group_Id as groupId, One.access_group_id as accessGroupId,  
+		Two.id as handleJurisdictionId, Two.name as handleJurisdictionName, 
+		Three.id as queryJurisdictionId, Three.name as queryJurisdictionName, 
+		Four.id as deptManagerId, Four.name as deptManagerName 
+		from s_user as One join s_role as Two join s_user_group as Three join s_access_group as Four
+		on One.role_id = Two.id and One.group_Id = Three.id and One.access_group_id = Four.id 
+	</select>
+	<insert id="addPersonnelManager">
+		insert into s_user(id, creator, createTime, updater, updateTime, remark, name, cnname, password, address, telephone, email, beginDate, endDate, access_fileLevel, menus, popedom, status, commendman, movetelephone, nowaddress, nowtelephone, identitycode, insurancecode, instancylinkman, instancytelephone, sex, birthday, personneltype, duty, workdate, highschool, finishschool, finishschooldate, consortname, youngonename, officetelephone, consorttelephone, avocation, consortcompany, strongsuit, communicate, bringup, organise, analyse, planing, empolder, relation, role_id, group_Id, access_group_id)
+		values(#{personnelManager.id}, #{personnelManager.creator}, #{personnelManager.createTime}, #{personnelManager.updater}, #{personnelManager.updateTime}, #{personnelManager.remark}, #{personnelManager.name}, #{personnelManager.cnname}, #{personnelManager.password}, #{personnelManager.address}, #{personnelManager.telephone}, #{personnelManager.email}, #{personnelManager.beginDate}, #{personnelManager.endDate}, #{personnelManager.accessFileLevel}, #{personnelManager.menus}, #{personnelManager.popedom}, #{personnelManager.status}, #{personnelManager.commendman}, #{personnelManager.movetelephone}, #{personnelManager.nowaddress}, #{personnelManager.nowtelephone}, #{personnelManager.identitycode}, #{personnelManager.insurancecode}, #{personnelManager.instancylinkman}, #{personnelManager.instancytelephone}, #{personnelManager.sex}, #{personnelManager.birthday}, #{personnelManager.personneltype}, #{personnelManager.duty}, #{personnelManager.workdate}, #{personnelManager.highschool}, #{personnelManager.finishschool}, #{personnelManager.finishschooldate}, #{personnelManager.consortname}, #{personnelManager.youngonename}, #{personnelManager.officetelephone}, #{personnelManager.consorttelephone}, #{personnelManager.avocation}, #{personnelManager.consortcompany}, #{personnelManager.strongsuit}, #{personnelManager.communicate}, #{personnelManager.bringup}, #{personnelManager.organise}, #{personnelManager.analyse}, #{personnelManager.planing}, #{personnelManager.empolder}, #{personnelManager.relation}, #{personnelManager.id}, #{personnelManager.groupId}, #{personnelManager.accessGroupId}) 
+	</insert>
+	<delete id="deletePersonnelManagerById">
+		delete from s_user 
+		where id=#{id}
+	</delete>
+</mapper>

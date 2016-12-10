@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.IProductDataDao">
+	<select id="findProductData" resultType="com.crm.model.ProductData">
+		select dataOne.id, dataOne.ptype_id as ptypeId, dataOne.sort, dataOne.creater, dataOne.createTime, dataOne.updater, dataOne.updateTime, dataOne.remark, dataOne.status, dataOne.code, dataOne.name, dataOne.model, dataOne.spec, dataOne.unit, dataOne.color, dataOne.product_size as productSize, dataOne.bar_code as barCode, dataOne.provider, dataOne.stock, dataOne.price, dataOne.buy_price as buyPrice, dataOne.picture, dataOne.pycode, dataOne.custom1, dataOne.custom2, dataOne.custom3, dataOne.custom4, dataOne.choice1, dataOne.choice2, dataOne.choice3, dataOne.choice4, dataOne.time1, dataOne.time2,  
+		typeOne.name as productTypeName 
+		from b_product as dataOne join b_product_type as typeOne 
+		on dataOne.ptype_id=typeOne.id
+		limit #{from}, #{pageSize}
+	</select>
+	<select id="countProductData" resultType="Integer">
+		select count(id)
+		from b_product
+	</select>
+	<select id="findAllProductData" resultType="com.crm.model.ProductData">
+		select dataOne.id, dataOne.ptype_id as ptypeId, dataOne.sort, dataOne.creater, dataOne.createTime, dataOne.updater, dataOne.updateTime, dataOne.remark, dataOne.status, dataOne.code, dataOne.name, dataOne.model, dataOne.spec, dataOne.unit, dataOne.color, dataOne.product_size as productSize, dataOne.bar_code as barCode, dataOne.provider, dataOne.stock, dataOne.price, dataOne.buy_price as buyPrice, dataOne.picture, dataOne.pycode, dataOne.custom1, dataOne.custom2, dataOne.custom3, dataOne.custom4, dataOne.choice1, dataOne.choice2, dataOne.choice3, dataOne.choice4, dataOne.time1, dataOne.time2,  
+		typeOne.name as productTypeName 
+		from b_product as dataOne join b_product_type as typeOne 
+		on dataOne.ptype_id=typeOne.id
+	</select>
+	<select id="findRootProductData" resultType="com.crm.model.ProductData">
+		select dataOne.id, dataOne.ptype_id as ptypeId, dataOne.sort, dataOne.creater, dataOne.createTime, dataOne.updater, dataOne.updateTime, dataOne.remark, dataOne.status, dataOne.code, dataOne.name, dataOne.model, dataOne.spec, dataOne.unit, dataOne.color, dataOne.product_size as productSize, dataOne.bar_code as barCode, dataOne.provider, dataOne.stock, dataOne.price, dataOne.buy_price as buyPrice, dataOne.picture, dataOne.pycode, dataOne.custom1, dataOne.custom2, dataOne.custom3, dataOne.custom4, dataOne.choice1, dataOne.choice2, dataOne.choice3, dataOne.choice4, dataOne.time1, dataOne.time2,  
+		typeOne.name as productTypeName 
+		from b_product as dataOne join b_product_type as typeOne 
+		on dataOne.ptype_id=typeOne.id
+		where pid = 0
+	</select>
+	<select id="findProductDatabyPid" resultType="com.crm.model.ProductData">
+		select dataOne.id, dataOne.ptype_id as ptypeId, dataOne.sort, dataOne.creater, dataOne.createTime, dataOne.updater, dataOne.updateTime, dataOne.remark, dataOne.status, dataOne.code, dataOne.name, dataOne.model, dataOne.spec, dataOne.unit, dataOne.color, dataOne.product_size as productSize, dataOne.bar_code as barCode, dataOne.provider, dataOne.stock, dataOne.price, dataOne.buy_price as buyPrice, dataOne.picture, dataOne.pycode, dataOne.custom1, dataOne.custom2, dataOne.custom3, dataOne.custom4, dataOne.choice1, dataOne.choice2, dataOne.choice3, dataOne.choice4, dataOne.time1, dataOne.time2,  
+		typeOne.name as productTypeName 
+		from b_product as dataOne join b_product_type as typeOne 
+		on dataOne.ptype_id=typeOne.id
+		where pid = #{ptypeId}
+	</select>
+	<insert id="addProductData">
+		insert into b_product(id, ptype_id, sort, creater, createTime, updater, updateTime, remark, status, code, name, model, spec, unit, color, product_size, bar_code, provider, stock, price, buy_price, picture, pycode, custom1, custom2, custom3, custom4, choice1, choice2, choice3, choice4, time1, time2)
+		values(#{productData.id}, #{productData.ptypeId}, #{productData.sort}, #{productData.creater}, #{productData.createTime}, #{productData.updater}, #{productData.updateTime}, #{productData.remark}, #{productData.status}, #{productData.code}, #{productData.name}, #{productData.model}, #{productData.spec}, #{productData.unit}, #{productData.color}, #{productData.productSize}, #{productData.barCode}, #{productData.provider}, #{productData.stock}, #{productData.price}, #{productData.buyPrice}, #{productData.picture}, #{productData.pycode}, #{productData.custom1}, #{productData.custom2}, #{productData.custom3}, #{productData.custom4}, #{productData.choice1}, #{productData.choice2}, #{productData.choice3}, #{productData.choice4}, #{productData.time1}, #{productData.time2})
+	</insert>
+	<delete id="deleteProductDataById">
+		delete from b_product 
+		where id=#{id}
+	</delete>
+	<select id="findProductDataById" resultType="com.crm.model.ProductData">
+		select * 
+		from b_product 
+		where id=#{id}
+	</select>
+</mapper>

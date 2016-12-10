@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.IDeptManagerDao">
+	<select id="findDeptManager" resultType="com.crm.model.DeptManager">
+		select id, remark, name, principal, incumbent, pid, fcode 
+		from s_user_group
+		limit #{from}, #{pageSize}
+	</select>
+	<select id="countDeptManager" resultType="Integer">
+		select count(id)
+		from s_user_group
+	</select>
+	<select id="findAllDeptManager" resultType="com.crm.model.DeptManager">
+		select One.id, One.remark, One.name, One.principal, One.incumbent, One.pid, One.fcode, 
+		Two.name as leaderName  
+		from s_user_group as One join s_user_group as Two
+		on One.pid = Two.id
+	</select>
+	<select id="findRootDeptManager" resultType="com.crm.model.DeptManager">
+		select id, remark, name, principal, incumbent, pid, fcode 
+		from s_user_group  
+		where pid = 0
+	</select>
+	<select id="findDeptManagerbyPid" resultType="com.crm.model.DeptManager">
+		select id, remark, name, principal, incumbent, pid, fcode 
+		from s_user_group  
+		where pid = #{pid}
+	</select>
+	<insert id="addDeptManager">
+		insert into s_user_group(id, remark, name, principal, incumbent, pid, fcode)
+		values(#{deptManager.id}, #{deptManager.remark}, #{deptManager.name}, #{deptManager.principal}, #{deptManager.incumbent}, #{deptManager.pid}, #{deptManager.fcode})
+	</insert>
+	<delete id="deleteDeptManagerById">
+		delete from s_user_group 
+		where id=#{id}
+	</delete>
+</mapper>

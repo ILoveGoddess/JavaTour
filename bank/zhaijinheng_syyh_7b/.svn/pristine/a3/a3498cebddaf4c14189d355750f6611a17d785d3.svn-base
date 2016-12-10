@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="zhaijinheng_syyh_7b">
+        <wb-resource deploy-path="/" source-path="/WebRoot"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="/zhaijinheng_syyh_7b"/>
+        <property name="java-output-path" value="/zhaijinheng_syyh_7b/WebRoot/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

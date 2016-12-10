@@ -1,0 +1,139 @@
+/* index css style */
+*{
+	padding:0;
+	margin:0;
+}
+
+.pager{font-size:12px;color:#000000;text-decoration:none;cursor:pointer;}
+a.normal{font-size:12px;color:#000000;text-decoration:none;cursor:pointer;}
+#title{
+	background-image:url(../image/index_title_bg1.gif);
+	background-repeat:repeat-x;
+	height:64px;
+}
+.userNameStyle{
+	font-size:12px;
+	color:#444444;
+}
+.telStyle{
+	font-size:12px;
+	color:#0871ee;
+}
+.helpStyle{
+	font-size:12px;
+	color:#ed4101;
+}
+.index_title_right{
+	font-size:12px;
+	color:#ffffff;
+}
+#index_content{
+	
+}
+#lefttable{
+	border-collapse:collapse;
+}
+#lefttable td{
+	border:1px solid #ccc;
+}
+
+.left_title_text{
+	font-size:13px;
+	color:#004e7b;
+	font-weight:bold;
+}
+#left_tree_innerTable1,#left_tree_innerTable2,#left_tree_innerTable3,#left_tree_innerTable4,#left_tree_innerTable5,#left_tree_innerTable6{
+	border:none;
+}
+#left_tree_innerTable1 td,#left_tree_innerTable2 td,#left_tree_innerTable3 td,#left_tree_innerTable4 td,#left_tree_innerTable5 td,#left_tree_innerTable6 td{
+	border:none;
+	color:#444444;
+	font-size:12px;
+	padding-left:20px;
+	height:22px;
+
+	border-bottom:1px solid #d8dbe0;
+}
+.mouseOverClass{
+	background-color:#e8ecf1;
+}
+.mouseOutClass{
+	background-color:#ffffff;
+}
+#index_main_table{
+	margin-left:5px;	border-collapse:collapsep;
+}
+#index_main_table td{
+	
+	background-image:url(../image/right_index_title.gif);
+	background-repeat:repeat-x;
+}
+#index_main_div1,#index_main_div2{
+	margin-top:12px;
+	border-collapse:collapsep;
+	border:1px solid #73c0e0;
+}
+#index_content{
+	margin-left:5px;
+}
+#index_main_divLi{
+	list-style-type:circle;
+}
+#selectTable td{
+	color:#424446;
+	font-size:12px;
+	height:30px;
+	padding-left:4px;
+	line-height:30px;
+}
+.inputTextStyle{
+	width:110;
+	height:20;
+	border:1px solid #c3d9eb;
+}
+.selectOptionStyle{
+	width:110;
+	height:20;
+}
+#selectTable_content{
+	border:1px solid #c3d9eb;
+}
+#select_row td{
+	font-size:12px;
+	color:#444444;
+}
+#select_row th{
+	font-size:12px;
+}
+.select_content_bg{
+	height:27px;
+	line-height:27px;
+	background-image:url(../image/select_content_bg.jpg);
+}
+.addCText{
+	width:90%;
+	height:20px;
+	border:1px solid #c3d9eb;
+}
+.addTimeInit{
+	width:90%;
+	height:20px;
+	border:1px solid #c3d9eb;
+	color:#cccccc;
+}
+.addTimeClick{
+	width:90%;
+	height:20px;
+	border:1px solid #c3d9eb;
+	color:#000000;
+}
+.addCText1{
+	width:99%;
+	height:20px;
+	border:1px solid #c3d9eb;
+}
+.addCText2{
+	width:99%;
+	height:40px;
+	border:1px solid #c3d9eb;
+}

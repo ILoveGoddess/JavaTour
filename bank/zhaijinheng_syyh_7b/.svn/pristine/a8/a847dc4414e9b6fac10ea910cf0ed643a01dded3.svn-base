@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="zhaijinheng_syyh_7b"
+  id="myeclipse.1476694742984"
+  context-root="/zhaijinheng_syyh_7b"
+  j2ee-spec="5.0"
+  archive="zhaijinheng_syyh_7b.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

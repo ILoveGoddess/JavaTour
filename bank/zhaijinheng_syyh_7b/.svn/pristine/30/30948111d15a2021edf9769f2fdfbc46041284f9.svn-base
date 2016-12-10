@@ -1,0 +1,19 @@
+1.jar
+
+mysql-connector-java-5.1.8-bin.jar 
+ 
+jstl-1.2.jar
+standard-1.1.2.jar
+
+jxl.jar  导出Excel
+------------------------------------------------
+2.
+(1)用户点击“用户管理” 会向:http://localhost:8088/syyh_6b/user/userList.do 发送请求
+(2)web.xml 有一个*.do，会执行*.do对应的servlet的service方法
+(3)此service方法作用：根据不同请求路径，调用不同类(Controller层)的不同方法
+
+
+Controller层：获得请求数据，调用Service层的方法,跳转
+
+
+

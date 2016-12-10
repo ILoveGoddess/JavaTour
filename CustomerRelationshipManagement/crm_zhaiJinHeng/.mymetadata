@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="crm_zhaiJinHeng"
+  id="myeclipse.1465263411137"
+  context-root="/crm_zhaiJinHeng"
+  j2ee-spec="5.0"
+  archive="crm_zhaiJinHeng.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,26 @@
+<ul class='simpleTree'>
+<li class='root'><span>根节点</span>
+<ul>
+<li id='5'><span>商品5</span></li>
+<li id='6'><span>商品6</span></li>
+<li id='7'><span>商品7</span></li>
+<li id='8'><span>商品8</span></li>
+<li id='9'><span>商品9</span></li>
+<li id='10'><span>商品10</span></li>
+<li id='20'><span>aaa</span></li>
+<li id='21'><span>bbb</span></li>
+<li id='22'><span>ccc</span>
+	<ul>
+	<li id='23'><span>ddd</span></li>
+	<li id='23'><span>ddd</span></li>
+	</ul>
+</li>
+<li id='24'><span>eee</span></li>
+<li id='25'><span>fff</span></li>
+<li id='26'><span>ggg</span></li>
+<li id='27'><span>hhh</span></li>
+<li id='28'><span>jjj2</span></li>
+<li id='29'><span>kkk1</span></li>
+</ul>
+</li>
+</ul>

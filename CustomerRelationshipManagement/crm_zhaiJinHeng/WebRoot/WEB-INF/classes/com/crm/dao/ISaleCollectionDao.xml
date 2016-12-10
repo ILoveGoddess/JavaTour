@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.ISaleCollectionDao">
+	<select id="findSaleCollection" resultType="com.crm.model.SaleCollection">
+		select id, owner_usr as ownerUsr, creater, createTime, updater, updateTime, remark, c_id as cId, c_name as cName, c_type as cType, payer, pay_date as payDate, pay_type as payType, bill_code as billCode, handler, total, statusid, status, auditor, audit_date as auditDate, audit_idea as auditIdea, code 
+		from b_gather 
+		limit #{from}, #{pageSize}
+	</select>
+	<select id="countSaleCollection" resultType="Integer">
+		select count(id)
+		from b_gather
+	</select>
+	<select id="findAllSaleCollection" resultType="com.crm.model.SaleCollection">
+		select * from b_gather
+	</select>
+</mapper>

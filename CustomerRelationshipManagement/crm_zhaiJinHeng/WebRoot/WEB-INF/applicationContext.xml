@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/task  
+		http://www.springframework.org/schema/task/spring-task-3.1.xsd"
+>
+
+	<context:property-placeholder location="/WEB-INF/jdbc.properties" />
+
+    <!-- 1.DataSource数据源，使用c3p0连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClassName}"></property>
+		<property name="jdbcUrl"     value="${jdbc.url}"></property>
+		<property name="user"        value="${jdbc.username}"></property>
+		<property name="password"    value="${jdbc.password}"></property>
+		<!-- 指定连接数据库连接池的最小连接数 -->
+		<property name="minPoolSize" value="10"></property>
+		<!-- 指定连接数据库连接池的最大连接数 -->
+		<property name="maxPoolSize" value="20"></property>
+		<!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
+		<property name="initialPoolSize" value="15"></property>
+		<!-- 指定连接数据库连接池的连接的最大空闲时间 -->
+		<property name="maxIdleTime" value="120"></property>
+		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+		<property name="acquireIncrement" value="5"></property>
+		<property name="maxStatements" value="100"></property>
+		<!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+		<property name="idleConnectionTestPeriod" value="60"></property>
+		<property name="automaticTestTable" value="c3p0testtable"></property>
+	</bean>
+
+    <!-- SqlSessionFactory -->
+    <!-- 创建SqlSessionFactory，同时指定数据源-->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!--define entity package  --><!-- 自动配置别名 -->
+        <property name="typeAliasesPackage" value="com.*.model" />
+    </bean>
+
+    <!-- 以注解方式扫描Spring Bean --> 
+	<!-- <context:annotation-config />  -->
+
+	<!-- 自动扫描组件，把controler下面的 controller去除,如果不去除会影响事务管理的。   -->
+	<context:component-scan base-package="com">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
+	</context:component-scan>
+	
+	
+	<!-- <task:annotation-driven/>  -->
+	<!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>    -->
+   
+    <!-- scan for mappers and let them be autowired -->
+    <!-- mybatis-spring-1.0.1.jar 通过自动扫描简化mapper的配置,创建dao bean（只需提供接口不需提供实现类 ） -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.*.dao" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+    <!--事务管理DataSourceTransactionManager-->
+     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="select*" read-only="true" propagation="REQUIRED" />
+            <tx:method name="find*"   read-only="true" propagation="REQUIRED" />
+            <tx:method name="get*"   read-only="true" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" isolation="READ_COMMITTED" />
+            <tx:method name="update*" propagation="REQUIRED" isolation="READ_COMMITTED" />
+            <tx:method name="add*" propagation="REQUIRED" isolation="READ_COMMITTED" />
+            <tx:method name="delete*" propagation="REQUIRED" isolation="READ_COMMITTED" />
+            <tx:method name="start*" propagation="REQUIRED" isolation="READ_COMMITTED" />
+            <tx:method name="*" rollback-for="Exception"/>
+        </tx:attributes>
+    </tx:advice>
+
+	<aop:config>
+        <aop:pointcut id="baseServiceMethods" expression="execution(* com.*.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="baseServiceMethods" />
+    </aop:config>
+    
+    <!-- 上传拦截，如最大上传值及最小上传值 -->  
+    <bean id="multipartResolver"  
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <property name="maxUploadSize" value="10000000" /><!-- 10M -->  
+    </bean> 
+</beans>

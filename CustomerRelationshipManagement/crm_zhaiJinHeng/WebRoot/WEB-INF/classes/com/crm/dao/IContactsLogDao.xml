@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.IContactsLogDao">
+	<select id="findContactsLog" resultType="com.crm.model.ContactsLog">
+		select One.id, One.c_id as cId, One.link_man as linkMan, One.link_fashion as linkFashion, One.link_type as linkType, One.link_time as linkTime, One.content, One.user_name as userName, One.next_touch_date as nextTouchDate, One.next_touch_aim as nextTouchAim, One.creater, One.create_time as createTime, One.updater, One.update_time as updateTime, One.remark, One.custom1, One.custom2, One.custom3, One.custom4, One.choice1, One.choice2, One.choice3, One.choice4, One.time1, One.time2, One.m_type as mType, One.share_flag as shareFlag, One.share_ids as shareIds, One.owner_usr as ownerUsr, 
+		Two.name as salesman 
+		from c_company_touch as One join s_user as Two
+		on One.owner_usr = Two.id 
+		limit #{from}, #{pageSize}
+	</select>
+	<select id="countContactsLog" resultType="Integer">
+		select count(id)
+		from c_company_touch
+	</select>
+	<select id="findAllContactsLog" resultType="com.crm.model.ContactsLog">
+		select One.id, One.c_id as cId, One.link_man as linkMan, One.link_fashion as linkFashion, One.link_type as linkType, One.link_time as linkTime, One.content, One.user_name as userName, One.next_touch_date as nextTouchDate, One.next_touch_aim as nextTouchAim, One.creater, One.create_time as createTime, One.updater, One.update_time as updateTime, One.remark, One.custom1, One.custom2, One.custom3, One.custom4, One.choice1, One.choice2, One.choice3, One.choice4, One.time1, One.time2, One.m_type as mType, One.share_flag as shareFlag, One.share_ids as shareIds, One.owner_usr as ownerUsr, 
+		Two.name as salesman 
+		from c_company_touch as One join s_user as Two
+		on One.owner_usr = Two.id
+	</select>
+	<insert id="addContactsLog">
+		insert into c_company_touch(id, c_id, link_man, link_fashion, link_type, link_time, content, user_name, next_touch_date, next_touch_aim, creater, create_time, updater, update_time, remark, custom1, custom2, custom3, custom4, choice1, choice2, choice3, choice4, time1, time2, m_type, share_flag, share_ids, owner_usr)
+		values(#{contactsLog.id}, #{contactsLog.cId}, #{contactsLog.linkMan}, #{contactsLog.linkFashion}, #{contactsLog.linkType}, #{contactsLog.linkTime}, #{contactsLog.content}, #{contactsLog.userName}, #{contactsLog.nextTouchDate}, #{contactsLog.nextTouchAim}, #{contactsLog.creater}, #{contactsLog.createTime}, #{contactsLog.updater}, #{contactsLog.updateTime}, #{contactsLog.remark}, #{contactsLog.custom1}, #{contactsLog.custom2}, #{contactsLog.custom3}, #{contactsLog.custom4}, #{contactsLog.choice1}, #{contactsLog.choice2}, #{contactsLog.choice3}, #{contactsLog.choice4}, #{contactsLog.time1}, #{contactsLog.time2}, #{contactsLog.mType}, #{contactsLog.shareFlag}, #{contactsLog.shareIds}, #{contactsLog.ownerUsr}) 
+	</insert>
+	<delete id="deleteContactsLogById">
+		delete from c_company_touch 
+		where id=#{id}
+	</delete>
+</mapper>

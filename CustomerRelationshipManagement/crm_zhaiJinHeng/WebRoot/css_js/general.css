@@ -1,0 +1,64 @@
+/* CSS Document */
+select{
+	z-index:1;
+}
+#popupContact{
+	display:none;
+	position:fixed;
+	height:384px;
+	width:408px;
+	_position:absolute;
+	background-color:#ffffff;
+	border:2px solid #cecece;
+	z-index:2;
+	padding:12px;
+	font-size:12px;
+}
+#popupContact h1{
+	color:#6fa5fd;
+	text-align:left;
+	font-size:22px;
+	font-weight:700;
+	border-bottom:1px dotted #d3d3d3;
+	padding-bottom:2px;
+	margin-bottom:20px;
+}
+#popupContactClose{
+	font-size:14px;
+	line-height:14px;
+	color:#6fa5fd;
+	font-weight:700;
+	position:absolute;
+	cursor:pointer;
+	top:4px;
+	right:6px;	
+}
+#backgroundPopup{
+	display:none;
+	position:fixed;
+	_position:absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	background-color:#000000;
+	border:1px solid #cecece;
+	z-index:1;
+}
+#contactArea{
+	position:absolute;
+	top:60px;
+	left:10px;
+	width:390px;
+	height:300px;
+	overflow:hidden;
+	overflow-x:hidden;
+	border:1px solid #cecece;
+}
+#dictionaryMsg{
+	position:absolute;
+	top:65px;
+	left:60px;
+	font-size:12px;
+	color:#ff0000;
+}

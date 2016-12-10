@@ -1,0 +1,113 @@
+1.springmvc+mybatis
+
+2.mybatis-3.0.5.jar代替之前版本jar
+
+
+3.web.xml
+  <!--用于加载指定的spring配置文件，配置文件的位置在<context-param> 中指定-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+
+4.web.xml中  
+  <!-- 定义编码 ,其中encoding是表示设置request的编码，forceEncoding表示是否同时设置response的编码。-->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping> 
+  
+5.下面配制有什么用
+	<!-- 静态文件 -->
+	<mvc:resources mapping="/script/**" location="/script/" />  
+  
+6.事务相关配置 
+read-only="true"表示该事务为只读事务,用于多条查询语句保证整体的读一致性.
+例如统计查询，报表查询，在这种场景下，可能会执行多次查询.
+否则，在前条SQL查询之后，后条SQL查询之前，数据被其他用户改变，则该次整体的统计查询将会出现读数据不一致的状态.
+
+isolation="READ_COMMITTED" 读已提交(事务的隔离级别)  
+
+rollback-for="Exception"
+---------------------------------------------------------------------------
+    <!-- tx:method的属性:
+          * name 是必须的,表示与事务属性关联的方法名(业务方法名),对切入点进行细化。通配符（*）可以用来指定一批关联到相同的事务属性的方法。如：'get*'、'handle*'、'on*Event'等等.
+
+          * propagation  不是必须的 ，默认值是REQUIRED 
+
+                            表示事务传播行为, 包括REQUIRED,SUPPORTS,MANDATORY,REQUIRES_NEW,NOT_SUPPORTED,NEVER,NESTED
+
+          * isolation    不是必须的 默认值DEFAULT 
+
+                            表示事务隔离级别(数据库的隔离级别) 
+
+          * timeout      不是必须的 默认值-1(永不超时)
+
+                            表示事务超时的时间（以秒为单位） 
+
+          * read-only    不是必须的 默认值false不是只读的 
+
+                            表示事务是否只读？ 
+
+          * rollback-for 不是必须的   
+
+                            表示将被触发进行回滚的 Exception(s)；以逗号分开。
+
+                            如：'com.foo.MyBusinessException,ServletException' 
+          
+          * no-rollback-for 不是必须的  
+
+                              表示不被触发进行回滚的 Exception(s)；以逗号分开。
+
+                              如：'com.foo.MyBusinessException,ServletException'
+
+        任何 RuntimeException 将触发事务回滚，但是任何 checked Exception 将不触发事务回滚                      
+
+     -->
+---------------------------------------------------------------------------
+
+Spring 当中常用事务类型
+
+REQUERED
+支持当前事务，如果当前没有事务，则新建事务，常用
+
+SUPPORTS
+支持当前事务，如果当前没有事务，就以非事务方式执行
+
+MANDATORY
+支持当前事务，如果当前没有事务，就抛出异常
+
+REQUIRES-NEW
+新建一个事务，如果当前存在事务，则将当前事务挂起
+
+NOT-SUPPORTED
+以非事务方式执行，如果当前存在事务，则挂起当前事务
+
+NEVER
+和NOT-SUPPORTED 一样，以非事务方式执行，区别在于如果当前存在事务，则抛出异常
+
+NESTED
+如果当前存在事务，则嵌套在事务内执行；如果当前没有事务，则执行REQUIRED 相同操作。  
+  
+--------------------------------------------------------------------
+
+
+  
+  
+  

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.IHandleJurisdictionDao">
+	<select id="findHandleJurisdiction" resultType="com.crm.model.HandleJurisdiction">
+		select id, remark, name, popedom 
+		from s_role 
+		limit #{from}, #{pageSize}
+	</select>
+	<select id="countHandleJurisdiction" resultType="Integer">
+		select count(id)
+		from s_role
+	</select>
+	<select id="findAllHandleJurisdiction" resultType="com.crm.model.HandleJurisdiction">
+		select id, remark, name, popedom 
+		from s_role 
+	</select>
+	<insert id="addHandleJurisdiction">
+		insert into s_role(id, remark, name, popedom) 
+		values(#{handleJurisdiction.id}, #{handleJurisdiction.remark}, #{handleJurisdiction.name}, #{handleJurisdiction.popedom})
+	</insert>
+	<delete id="deleteHandleJurisdictionById">
+		delete from s_role 
+		where id=#{id}
+	</delete>
+</mapper>

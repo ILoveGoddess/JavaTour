@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.ISaleOrderDao">
+	<select id="findSaleOrder" resultType="com.crm.model.SaleOrder">
+		select id, owner_usr as ownerUsr, creater, createTime, updater, updateTime, remark, code, order_date as orderDate, c_id as cId, c_name as cName, c_type as cType, linkman, telephone, address, seller, total, agio, agio_total as agioTotal, auditor, audit_date as auditDate, status_id as statusId, status, audit_reason as auditReason, custom1, custom2, custom3, custom4, choice1, choice2, choice3, choice4, time1, time2, share_flag as shareFlag, share_ids as shareIds  
+		from b_order 
+		limit #{from}, #{pageSize}
+	</select>
+	<select id="countSaleOrder" resultType="Integer">
+		select count(id)
+		from b_order
+	</select>
+	<select id="findAllSaleOrder" resultType="com.crm.model.SaleOrder">
+		select One.id, One.owner_usr as ownerUsr, One.creater, One.createTime, One.updater, One.updateTime, One.remark, One.code, One.order_date as orderDate, One.c_id as cId, One.c_name as cName, One.c_type as cType, One.linkman, One.telephone, One.address, One.seller, One.total, One.agio, One.agio_total as agioTotal, One.auditor, One.audit_date as auditDate, One.status_id as statusId, One.status, One.audit_reason as auditReason, One.custom1, One.custom2, One.custom3, One.custom4, One.choice1, One.choice2, One.choice3, One.choice4, One.time1, One.time2, One.share_flag as shareFlag, One.share_ids as shareIds,  
+		Two.name as salesman 
+		from b_order as One join s_user as Two
+		on One.owner_usr = Two.id
+	</select>
+	<insert id="addSaleOrder">
+		insert into b_order(id, owner_usr,creater, createTime, updater, updateTime, remark, code, order_date, c_id, c_name, c_type, linkman, telephone, address, seller, total, agio, agio_total, auditor, audit_date, status_id, status, audit_reason, custom1, custom2, custom3, custom4, choice1, choice2, choice3, choice4, time1, time2, share_flag, share_ids)
+		values(#{saleOrder.id}, #{saleOrder.ownerUsr}, #{saleOrder.creater}, #{saleOrder.createTime}, #{saleOrder.updater}, #{saleOrder.updateTime}, #{saleOrder.remark}, #{saleOrder.code}, #{saleOrder.orderDate}, #{saleOrder.cId}, #{saleOrder.cName}, #{saleOrder.cType}, #{saleOrder.linkman}, #{saleOrder.telephone}, #{saleOrder.address}, #{saleOrder.seller}, #{saleOrder.total}, #{saleOrder.agio}, #{saleOrder.agioTotal}, #{saleOrder.auditor}, #{saleOrder.auditDate}, #{saleOrder.statusId}, #{saleOrder.status}, #{saleOrder.auditReason}, #{saleOrder.custom1}, #{saleOrder.custom2}, #{saleOrder.custom3}, #{saleOrder.custom4}, #{saleOrder.choice1}, #{saleOrder.choice2}, #{saleOrder.choice3}, #{saleOrder.choice4}, #{saleOrder.time1}, #{saleOrder.time2}, #{saleOrder.shareFlag}, #{saleOrder.shareIds}) 
+	</insert>
+	<delete id="deleteSaleOrderById">
+		delete from b_order 
+		where id=#{id}
+	</delete>
+</mapper>		

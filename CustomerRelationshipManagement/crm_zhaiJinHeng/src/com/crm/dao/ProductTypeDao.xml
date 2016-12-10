@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.ProductTypeDao">
+	<select id="findProductType" resultType="com.crm.model.ProductType">
+		select p1.id,p1.pid,p1.code,p1.name,p1.remark,p2.name as fatherName 
+		from b_product_type p1 left join b_product_type p2
+		on p1.pid=p2.id 
+		limit #{from},#{pageSize}
+	
+	</select>
+	<select id="countProductType" resultType="Integer">
+		select count(id) 
+		from b_product_type 
+	</select>
+	<select id="findAllProductType" resultType="com.crm.model.ProductType">
+		select id,pid,code,name,remark 
+		from b_product_type
+	
+	</select>
+	<select id="findRootProductType" resultType="com.crm.model.ProductType">
+		select id,pid,code,name,remark 
+		from b_product_type 
+		where pid=0
+	
+	</select>
+	<select id="findProductTypebyPid" resultType="com.crm.model.ProductType">
+		select id,pid,code,name,remark 
+		from b_product_type 
+		where pid=#{pid}
+	</select>
+	<insert id="addProductType">
+		insert into b_product_type(pid,code,name,remark,create_time) 
+		values(#{productType.pid},#{productType.code},#{productType.name},#{productType.remark},#{productType.createTime})
+	</insert>
+	<select id="countProductTypeByPid" resultType="Integer">
+		select count(id) 
+		from b_product_type 
+		where pid=#{pid}
+	
+	</select>
+	<select id="countProduct" resultType="Integer">
+		select count(id) 
+		from b_product
+		where ptype_id=#{id}
+	</select>
+	<delete id="deleteProductTypeById">
+		delete from b_product_type 
+		where id=#{id}
+	</delete>
+	<select id="findProductTypeById" resultType="com.crm.model.ProductType">
+		select id,pid,code,name,remark 
+		from b_product_type 
+		where id=#{id}
+	</select>
+</mapper>

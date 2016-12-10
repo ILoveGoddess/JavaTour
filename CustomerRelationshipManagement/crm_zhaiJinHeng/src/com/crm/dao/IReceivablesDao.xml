@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.IReceivablesDao">
+	<select id="findReceivables" resultType="com.crm.model.Receivables">
+		select id, sale_id as saleId, pid, owner_usr as ownerUsr, shareId, read_shareId as readShareId, creator, createTime, updater, updateTime, remark, c_id as cId, c_name as cName, c_type as cType, build_date as buildDate, sale_code as saleCode, total, payed, balance, over_flag as overFlag, status 
+		from b_need_gather 
+		limit #{from}, #{pageSize}
+	</select>
+	<select id="countReceivables" resultType="Integer">
+		select count(id)
+		from b_need_gather
+	</select>
+	<select id="findAllReceivables" resultType="com.crm.model.Receivables">
+		select One.id, One.sale_id as saleId, One.pid, One.owner_usr as ownerUsr, One.shareId, One.read_shareId as readShareId, One.creator, One.createTime, One.updater, One.updateTime, One.remark, One.c_id as cId, One.c_name as cName, One.c_type as cType, One.build_date as buildDate, One.sale_code as saleCode, One.total, One.payed, One.balance, One.over_flag as overFlag, One.status, 
+		Two.code as clientCode, Two.name as cName, Two.grade as clientGrade, Two.region_name as clientRegionName, Two.province as clientProvince, Two.city as clientCity, Two.address as clientAddress, Two.email as clientEmail, Two.tel1 as clientTel1, Two.tel2 as clientTel2, 
+		Three.code as saleCode
+		from b_need_gather as One join c_company as Two join b_order as Three 
+		on One.sale_id = Three.id and One.c_id = Two.id
+	</select>
+	<insert id="addReceivables">
+		insert into b_need_gather(id, sale_id, pid, owner_usr, shareId, read_shareId, creator, createTime, updater, updateTime, remark, c_id, c_name, c_type, build_date, sale_code, total, payed, balance, over_flag, status)
+		values(#{receivables.id}, #{receivables.saleId}, #{receivables.pid}, #{receivables.ownerUsr}, #{receivables.shareId}, #{receivables.readShareId}, #{receivables.creator}, #{receivables.createTime}, #{receivables.updater}, #{receivables.updateTime}, #{receivables.remark}, #{receivables.cId}, #{receivables.cName}, #{receivables.cType}, #{receivables.buildDate}, #{receivables.saleCode}, #{receivables.total}, #{receivables.payed}, #{receivables.balance}, #{receivables.overFlag}, #{receivables.status})
+	</insert>
+</mapper>

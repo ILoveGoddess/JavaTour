@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.IContactsDao">
+	<select id="findContacts" resultType="com.crm.model.Contacts">
+		select id, name, pycode, code, sex, birthday, department, duty, office_tel as officeTel, home_tel as homeTel, mobile, email, qq_num as qqNum, qq_name as qqName, postcode, address, fax, other_link as otherLink, hobby, taboo, main_flag as mainFlag, creater, create_time as createTime, updater, update_time as updateTime, remark, custom1, custom2, custom3, custom4, choice1, choice2, choice3, choice4, time1, time2, m_type as mType, share_flag as shareFlag, share_ids as shareIds, c_id as cId, owner_usr as ownerUsr 
+		from c_company_linkman 
+		limit #{from}, #{pageSize}
+	</select>
+	<select id="countContacts" resultType="Integer">
+		select count(id)
+		from c_company_linkman
+	</select>
+	<select id="findAllContacts" resultType="com.crm.model.Contacts">
+		select id, name, pycode, code, sex, birthday, department, duty, office_tel as officeTel, home_tel as homeTel, mobile, email, qq_num as qqNum, qq_name as qqName, postcode, address, fax, other_link as otherLink, hobby, taboo, main_flag as mainFlag, creater, create_time as createTime, updater, update_time as updateTime, remark, custom1, custom2, custom3, custom4, choice1, choice2, choice3, choice4, time1, time2, m_type as mType, share_flag as shareFlag, share_ids as shareIds, c_id as cId, owner_usr as ownerUsr 
+		from c_company_linkman
+	</select>
+	<insert id="addContacts">
+		insert into c_company_linkman(id, name, pycode, code, sex, birthday, department, duty, office_tel, home_tel, mobile, email, qq_num, qq_name, postcode, address, fax, other_link, hobby, taboo, main_flag, creater, create_time, updater, update_time, remark, custom1, custom2, custom3, custom4, choice1, choice2, choice3, choice4, time1, time2, m_type, share_flag, share_ids, c_id, owner_usr) 
+		values(#{contacts.id}, #{contacts.name}, #{contacts.pycode}, #{contacts.code}, #{contacts.sex}, #{contacts.birthday}, #{contacts.department}, #{contacts.duty}, #{contacts.officeTel}, #{contacts.homeTel}, #{contacts.mobile}, #{contacts.email}, #{contacts.qqNum}, #{contacts.qqName}, #{contacts.postcode}, #{contacts.address}, #{contacts.fax}, #{contacts.otherLink}, #{contacts.hobby}, #{contacts.taboo}, #{contacts.mainFlag}, #{contacts.creater}, #{contacts.createTime}, #{contacts.updater}, #{contacts.updateTime}, #{contacts.remark}, #{contacts.custom1}, #{contacts.custom2}, #{contacts.custom3}, #{contacts.custom4}, #{contacts.choice1}, #{contacts.choice2}, #{contacts.choice3}, #{contacts.choice4}, #{contacts.time1}, #{contacts.time2}, #{contacts.mType}, #{contacts.shareFlag}, #{contacts.shareIds}, #{contacts.cId}, #{contacts.ownerUsr}) 
+	</insert>
+	<delete id="deleteContactsById">
+		delete from c_company_linkman 
+		where id=#{id}
+	</delete>
+</mapper>
